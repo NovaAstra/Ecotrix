@@ -1,4 +1,5 @@
 export type * from "./Collection"
 export type * from "./Function"
 export type * from "./Primitive"
-export type * from "./Iteration"
+export type * from "./Array"
+export type * from "./Object"

@@ -1,3 +1,4 @@
+
 export type AnyArray<T = any> = Array<T>
 
 export type ReadonlyArray<T = any> = Readonly<AnyArray<T>>
@@ -12,9 +13,9 @@ export type Length<T extends AnyArray> =
     : never;
 
 export type Tail<T extends AnyArray> =
-    T extends readonly []
+    T extends []
     ? T
-    : T extends readonly [any?, ...infer L]
+    : T extends [any?, ...infer L]
     ? L
     : T
 
@@ -26,8 +27,11 @@ export type Head<T extends AnyArray> =
 export type Last<T extends AnyArray> =
     T[Length<Tail<T>>]
 
+export type LastKey<L extends AnyArray> =
+    Length<Tail<L>>
+
 export type Concat<
     T1 extends AnyArray,
     T2 extends AnyArray
-> =
-    [...T1, ...T2]
+> = [...T1, ...T2]
+

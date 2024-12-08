@@ -1,4 +1,4 @@
-import type { ReadonlyArray } from "./Iteration"
+import type { ReadonlyArray } from "./Array"
 
 export type AnyFunction<
     T extends ReadonlyArray = any[],

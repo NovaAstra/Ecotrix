@@ -1,6 +1,6 @@
-const placeholder = typeof Symbol === 'function' ? Symbol('x') : 0xedd1;
+const GapSymbol = typeof Symbol === 'function' ? Symbol('gap') : 0xedd1;
 
-export type Placeholder = typeof placeholder & {};
+export type Gap = typeof GapSymbol & {};
 
 export type Primitive =
     | string
