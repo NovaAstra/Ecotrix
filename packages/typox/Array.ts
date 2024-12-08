@@ -27,11 +27,16 @@ export type Head<T extends AnyArray> =
 export type Last<T extends AnyArray> =
     T[Length<Tail<T>>]
 
-export type LastKey<L extends AnyArray> =
-    Length<Tail<L>>
+export type LastKey<T extends AnyArray> =
+    Length<Tail<T>>
 
 export type Concat<
     T1 extends AnyArray,
     T2 extends AnyArray
 > = [...T1, ...T2]
 
+export type Append<T extends AnyArray, L extends any> =
+    [...T, L]
+
+export type Prepend<T extends AnyArray, L extends any> =
+    [L, ...T]
