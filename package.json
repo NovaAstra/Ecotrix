@@ -1,0 +1,11 @@
+{
+    "name": "ecotrix",
+    "type": "module",
+    "version": "0.0.1",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^22.10.1",
+        "parcel": "^2.13.2",
+        "typescript": "^5.7.2"
+    }
+}
