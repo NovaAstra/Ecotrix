@@ -3,6 +3,9 @@
     "type": "module",
     "version": "0.0.1",
     "private": true,
+    "scripts": {
+        "dev:match": "pnpm --filter @ecotrix/match dev"
+    },
     "devDependencies": {
         "@types/node": "^22.10.1",
         "parcel": "^2.13.2",
