@@ -1,4 +1,5 @@
 /**
+@name AnyArray
 @description
 This type represents a mutable array where each element is of type `T`.
 The default type for `T` is `any`, but you can specify it to create arrays of specific types.
@@ -20,6 +21,7 @@ export type AnyArray<T = any> = T[];
 
 
 /**
+@name Length
 @description
 Extracts the length of the array type `T`. If `T` is a valid array, 
 it returns the length as a type. Otherwise, it returns `never`.
@@ -41,6 +43,7 @@ export type Length<T extends AnyArray> =
 
 
 /**
+@name Tail
 @description
 Extracts the "tail" (all elements except the first) of an array type `T`.
 If `T` is empty, returns `T`. If `T` is non-empty, 
@@ -66,6 +69,7 @@ export type Tail<T extends AnyArray> =
 
 
 /**
+@Last Head
 @description
 Extracts the first element of an array type `T`.
 If `T` is empty, it returns `never`. Otherwise, 
@@ -93,6 +97,7 @@ export type Head<T extends AnyArray> =
 
 
 /**
+@name Last
 @description
 Extracts the last element of an array type `T`.
 It uses the `Tail` type to remove the first element and 
@@ -120,6 +125,7 @@ export type Last<T extends AnyArray> =
 
 
 /**
+@name Concat
 @description
 oncatenates two arrays `T1` and `T2` into a single array type.
 The result is an array containing all elements from `T1` followed by all elements from `T2`.
@@ -147,6 +153,7 @@ export type Concat<
 
 
 /**
+@name Arrayable
 @description
 The `Arrayable` type allows functions, methods, 
 or data structures to accept either a single item 
@@ -182,6 +189,7 @@ demo(['A', 'B'])
 export type Arrayable<T> = T | AnyArray<T>;
 
 /**
+@name ArrayValues
 @description
 Extracts the union type of the array elements from the array type `T`.
 It returns the type of all values contained in the array.
