@@ -20,6 +20,10 @@ importers:
 
   packages/match: {}
 
+  packages/plump: {}
+
+  packages/typox: {}
+
 packages:
 
   '@babel/code-frame@7.26.2':
