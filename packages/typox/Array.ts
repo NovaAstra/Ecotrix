@@ -1,18 +1,23 @@
 /**
 @name AnyArray
 @description
-This type represents a mutable array where each element is of type `T`.
-The default type for `T` is `any`, but you can specify it to create arrays of specific types.
+A type that represents an array of any type. 
 
-@template T The generic type parameter for the elements of the array.
+@template T The type of the elements in the array. Defaults to `any`.
 
 @example
 ```ts
-const numbers: AnyArray<number> = [1, 2, 3];
-numbers.push(4);
+🔨 Array of numbers
+type A = AnyArray<number>;
+=> type A = number[]
 
-const fruits: AnyArray<string> = ['apple', 'banana'];
-fruits.push('cherry');
+💀 Array of strings
+type B = AnyArray<string>;
+=> type B = string[]
+
+🔨 Array with elements of any type (default)
+type C = AnyArray;
+=> type C = any[]
 ```
 
 @category Array
@@ -23,15 +28,19 @@ export type AnyArray<T = any> = T[];
 /**
 @name Length
 @description
-Extracts the length of the array type `T`. If `T` is a valid array, 
-it returns the length as a type. Otherwise, it returns `never`.
+A type that extracts the length of an array as a type.
 
-@template T The type of the array, extending `AnyArray`.
+@template T The type of the array.
 
 @example
 ```ts
+🔨 Length of a number array
 type A = Length<[1, 2, 3]>;
 => type A = 3
+
+💀 Length of an empty array
+type B = Length<[]>;
+=> type B = 0
 ```
 
 @category Array
@@ -45,17 +54,21 @@ export type Length<T extends AnyArray> =
 /**
 @name Tail
 @description
-Extracts the "tail" (all elements except the first) of an array type `T`.
-If `T` is empty, returns `T`. If `T` is non-empty, 
-returns the remaining elements as a new array type.
+A type that extracts all elements of an array except for the first one. 
+If the array is empty, it returns the array itself. 
+If the array has only one element, it returns an empty array.
 
-@template T The type of the array, extending `AnyArray`.
+@template T The type of the array.
 
 @example
 ```ts
-🔨 Example with a non-empty mutable array
+🔨 Tail of a number array
 type A = Tail<[1, 2, 3]>;
 => type A = [2, 3]
+
+💀 Tail of a single-element array
+type B = Tail<[1]>;
+=> type B = []
 ```
 
 @category Array
@@ -71,19 +84,18 @@ export type Tail<T extends AnyArray> =
 /**
 @Last Head
 @description
-Extracts the first element of an array type `T`.
-If `T` is empty, it returns `never`. Otherwise, 
-it returns the type of the first element.
+A type that extracts the first element of an array.
+If the array is empty, it returns `never`.
 
-@template T The type of the array, extending `AnyArray`.
+@template T The type of the array.
 
 @example
 ```ts
-🔨 Head of a non-empty array
+🔨 First element of a number array
 type A = Head<[1, 2, 3]>;
 => type A = 1
 
-💀 Head of an empty array
+💀 First element of an empty array
 type B = Head<[]>;
 => type B = never
 ```
@@ -99,15 +111,14 @@ export type Head<T extends AnyArray> =
 /**
 @name Last
 @description
-Extracts the last element of an array type `T`.
-It uses the `Tail` type to remove the first element and 
-then accesses the last element of the resulting array.
+A type that extracts the last element of an array. 
+If the array is empty, it returns `never`.
 
-@template T The type of the array, extending `AnyArray`.
+@template T The type of the array.
 
 @example
 ```ts
-🔨 Last element of a non-empty array
+🔨 Last element of a number array
 type A = Last<[1, 2, 3]>;
 => type A = 3
 
@@ -127,21 +138,21 @@ export type Last<T extends AnyArray> =
 /**
 @name Concat
 @description
-oncatenates two arrays `T1` and `T2` into a single array type.
-The result is an array containing all elements from `T1` followed by all elements from `T2`.
+A type that combines two arrays into a single array, 
+preserving the types of the elements in both arrays.
 
 @template T1
 @template T2
 
 @example
 ```ts
-🔨 Concatenate two arrays of numbers
+🔨 Concatenating two arrays of numbers
 type A = Concat<[1, 2], [3, 4]>;
 => type A = [1, 2, 3, 4]
 
-💀 Concatenate a number array with a string array
-type B = Concat<[1, 2], ['a', 'b']>;
-=> type B = [1, 2, "a", "b"]
+💀 Concatenating a string array with a number array
+type B = Concat<['apple'], [1]>;
+=> type B = ['apple', 1]
 ```
 
 @category Array
@@ -155,12 +166,11 @@ export type Concat<
 /**
 @name Arrayable
 @description
-The `Arrayable` type allows functions, methods, 
-or data structures to accept either a single item 
-or multiple items (an array) of the same type, providing 
-flexibility and reducing the need for overloading or handling different types separately. 
- 
-@template T The type of the element(s).
+A type that allows a value to be either a single item or an array of items. 
+This is perfect for situations where you want to accept both individual values 
+and arrays without over-complicating your type definitions. 
+
+@template T The type of the value(s).
   
 @example
 ```ts
@@ -191,13 +201,15 @@ export type Arrayable<T> = T | AnyArray<T>;
 /**
 @name ArrayValues
 @description
-Extracts the union type of the array elements from the array type `T`.
-It returns the type of all values contained in the array.
+Extracts the union type of the array elements from the array type `T`. 
+It returns a type that represents all possible values contained in the array.
 
-@template T The type of the array, extending `AnyArray`.
+@template T The type of the array, which must extend `AnyArray`.
 
 @example
 ```ts
+import type {ArrayValues} from '@ecotrix/typox';
+
 🔨 Array of numbers
 type A = ArrayValues<[1, 2, 3]>;
 => type A = 3 | 1 | 2
