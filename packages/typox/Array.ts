@@ -22,7 +22,7 @@ type C = AnyArray;
 
 @category Array
  */
-export type AnyArray<T = any> = T[];
+export type AnyArray<T = any> = Array<T> | ReadonlyArray<T>;
 
 
 /**
