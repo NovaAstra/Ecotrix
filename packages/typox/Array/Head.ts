@@ -1,11 +1,11 @@
-import type { AnyArray } from "./Array"
+import type { AnyArray } from "./AnyArray"
 
 /**
  * @name Head
  * @category [[Array]]
  * @description
  * `Head` 类型用于提取数组类型的第一个元素类型。
- * 如果数组为空，则返回 `never`，否则返回数组的第一个元素类型。
+ * 
  * 
  * @template T - 数组类型，必须是 `AnyArray`。
  * 

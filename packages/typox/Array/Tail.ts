@@ -1,4 +1,4 @@
-import type { AnyArray } from "./Array"
+import type { AnyArray } from "./AnyArray"
 
 /**
  * @name Tail
