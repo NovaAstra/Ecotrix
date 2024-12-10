@@ -1,4 +1,4 @@
-import type { AnyArray } from "./AnyArray"
+import type { AnyArray } from "./Array"
 
 /**
  * @name Concat

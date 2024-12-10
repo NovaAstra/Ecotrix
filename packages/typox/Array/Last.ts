@@ -1,4 +1,4 @@
-import { AnyArray } from "./AnyArray"
+import { AnyArray } from "./Array"
 import { Length } from "./Length"
 import { Tail } from "./Tail"
 
