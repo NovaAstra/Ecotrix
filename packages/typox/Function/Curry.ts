@@ -1,7 +1,6 @@
-import type { Cast } from "../Any/_api"
+import type { Cast, Placeholder } from "../Any/_api"
 import type { AnyArray } from "../Array/_api"
 import type { NonNullableFlat } from "../Object/_api"
-import type { Placeholder } from "../Primitive/_api"
 
 
 /**
