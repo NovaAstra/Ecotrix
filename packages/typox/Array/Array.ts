@@ -1,24 +1,29 @@
 /**
- * @name AnyArray
- * @category [[Array]]
- * @description
- * `AnyArray` 类型表示一个可以是可变数组 (`Array<T>`) 或只读数组 (`ReadonlyArray<T>`)。
- * 
- * 该类型允许对数组元素进行灵活操作，无论数组是可变的还是只读的。
- * 
- * @template T - 数组元素的类型，可以是任意类型。
- * 
- * @example
- * ```ts
- * import type {AnyArray} from '@ecotrix/typox';
- * 
- * const average = (numbers: AnyArray<number>) => numbers.reduce((sum, n) => sum + n, 0) / numbers.length;
- *
- * const two = average([1, 2, 3]);
- * //  ^? number
- *
- * const three = average([1, 2, 3, 4, 5] as const);
- * //  ^? number
- * ```
- */
+@name AnyArray
+
+@category Array
+
+@description
+`AnyArray` 类型定义了一个元素类型为 `T` 的数组，可以是可变数组 (`Array<T>`) 或只读数组 (`ReadonlyArray<T>`)。
+- 如果需要对数组进行修改，使用 `Array<T>`。
+- 如果不希望修改数组，使用 `ReadonlyArray<T>`。
+
+⚠️ **警告**：通过默认值 `T = any`，可以方便地表示任意类型的数组。
+
+@template T - 数组元素的类型，默认为 `any`。
+
+@example
+```ts
+import type {AnyArray} from '@ecotrix/typox';
+
+type A = AnyArray<string>;
+//  ^? string[] | readonly string[]
+
+type B = AnyArray<number[]>;
+//  ^? number[][] | readonly number[][]
+
+type C = AnyArray;
+//  ^? any[] | readonly any[]
+```
+**/
 export type AnyArray<T = any> = Array<T> | ReadonlyArray<T>;
