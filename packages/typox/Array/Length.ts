@@ -2,9 +2,7 @@ import type { AnyArray } from "./Array"
 
 /**
 @name Length
-
 @category Array
-
 @description
 `Length` 类型用于获取一个数组类型 `T` 的长度。它通过 TypeScript 的条件类型和 `infer` 关键字提取数组的 `length` 属性。
 - 如果 `T` 是一个数组（包括只读数组），则返回数组的长度类型。

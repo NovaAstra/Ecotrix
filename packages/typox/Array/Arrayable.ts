@@ -1,8 +1,6 @@
 /**
 @name Arrayable
-
 @category Array
-
 @description
 `Arrayable` 类型允许某个类型 `T` 被表示为：
 - 单一类型 `T`。

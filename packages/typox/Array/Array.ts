@@ -1,8 +1,6 @@
 /**
 @name AnyArray
-
 @category Array
-
 @description
 `AnyArray` 类型定义了一个元素类型为 `T` 的数组，可以是可变数组 (`Array<T>`) 或只读数组 (`ReadonlyArray<T>`)。
 - 如果需要对数组进行修改，使用 `Array<T>`。

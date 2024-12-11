@@ -1,8 +1,6 @@
 /**
 @name Tuple
-
 @category Array
-
 @description
 `Tuple` 类型表示一个元组，其中：
 - 第一个元素是可选的。

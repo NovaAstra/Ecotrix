@@ -1,12 +1,10 @@
-import { AnyArray } from "./Array"
-import { Length } from "./Length"
-import { Tail } from "./Tail"
+import type { AnyArray } from "./Array"
+import type { Length } from "./Length"
+import type { Tail } from "./Tail"
 
 /**
 @name Last
-
 @category Array
-
 @description
 `Last` 类型用于从一个数组类型 `T` 中提取出最后一个元素的类型。
 - 如果 `T` 是一个非空数组，则返回数组的最后一个元素类型。

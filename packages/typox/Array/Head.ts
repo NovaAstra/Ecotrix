@@ -2,9 +2,7 @@ import type { AnyArray } from "./Array"
 
 /**
 @name Head
-
 @category Array
-
 @description
 `Head` 类型用于从数组类型 `T` 中提取第一个元素的类型。
 - 如果 `T` 是非空数组，则返回数组的第一个元素类型。

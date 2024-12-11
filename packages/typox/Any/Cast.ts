@@ -1,8 +1,6 @@
 /**
 @name Cast
-
 @category Any
-
 @description
 `Cast` 类型用于将类型 `T1` 强制转换为 `T2`，并确保类型兼容性：
 - 如果 `T1` 是 `T2` 的子类型，直接返回 `T1`。

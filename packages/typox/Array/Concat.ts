@@ -2,9 +2,7 @@ import type { AnyArray } from "./Array"
 
 /**
 @name Concat
-
 @category Array
-
 @description
 `Concat` 类型用于将两个数组类型 `T1` 和 `T2` 拼接成一个新数组类型。
 - `T1` 和 `T2` 必须是 `AnyArray` 类型（即 `Array<T>` 或 `ReadonlyArray<T>`）。

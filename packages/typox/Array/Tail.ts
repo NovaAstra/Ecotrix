@@ -1,11 +1,8 @@
-import { AnyArray } from "./Array"
-
+import type { AnyArray } from "./Array"
 
 /**
 @name Tail
-
 @category Array
-
 @description
 `Tail` 类型用于从一个数组类型 `T` 中移除第一个元素，返回剩余部分的类型。
 - 如果 `T` 是一个非空数组，则返回数组去掉第一个元素后的类型（剩余部分）。
