@@ -1,1 +1,8 @@
 export type * from "./Array"
+export type * from "./Arrayable"
+export type * from "./Concat"
+export type * from "./Head"
+export type * from "./Last"
+export type * from "./Length"
+export type * from "./Tail"
+export type * from "./Tuple"
