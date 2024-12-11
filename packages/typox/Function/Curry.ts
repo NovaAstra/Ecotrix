@@ -1,5 +1,5 @@
 import type { Cast, Placeholder } from "../Any/_api"
-import type { AnyArray, Length, Append, Prepend, Tail } from "../Array/_api"
+import type { AnyArray, Length, Append, Prepend, Tail, RequiredKeys } from "../Array/_api"
 import type { NonNullableFlat } from "../Object/_api"
 import type { AnyFunction } from "./Function"
 
@@ -53,7 +53,7 @@ export type Curry<T extends AnyFunction> =
         G extends AnyArray = any[],
         R extends any = ReturnType<T>
     >(...args: Gaps<Parameters<T>> | P) =>
-        any extends never
+        RequiredKeys<G> extends never
         ? R
         : Curry<(...args: G) => R>
 
