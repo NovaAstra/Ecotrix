@@ -20,7 +20,11 @@ importers:
 
   packages/match: {}
 
-  packages/plump: {}
+  packages/plump:
+    devDependencies:
+      '@ecotrix/typox':
+        specifier: workspace:^
+        version: link:../typox
 
   packages/typox: {}
 

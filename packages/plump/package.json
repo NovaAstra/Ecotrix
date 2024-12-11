@@ -1,7 +1,10 @@
 {
-    "name": "@ecotrix/plump",
-    "type": "module",
-    "version": "0.0.1",
-    "private": true,
-    "main": "index.ts"
+   "name": "@ecotrix/plump",
+   "type": "module",
+   "version": "0.0.1",
+   "private": true,
+   "main": "index.ts",
+   "devDependencies": {
+      "@ecotrix/typox": "workspace:^"
+   }
 }
