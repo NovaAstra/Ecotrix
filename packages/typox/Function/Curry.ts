@@ -56,3 +56,7 @@ export type Curry<T extends AnyFunction> =
         any extends never
         ? R
         : Curry<(...args: G) => R>
+
+type A = (a: string, b: number, c: string | number) => number;
+type B = Parameters<A>
+type C = Gaps<B>
