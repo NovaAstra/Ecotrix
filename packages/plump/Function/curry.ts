@@ -8,8 +8,3 @@ export function curry(fn: AnyFunction) {
 
     return curried;
 }
-
-
-const result = curry((a, b, c) => a + b + c)(1, 2, 3)
-
-console.log(result)
