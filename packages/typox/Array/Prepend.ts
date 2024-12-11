@@ -18,7 +18,7 @@ type A = Prepend<[2, 3], 1>;
 //  ^? [1, 2, 3]
 
 type B = Prepend<readonly [2, 3], 1>;
-//  ^? readonly [1, 2, 3]
+//  ^? [1, 2, 3]
 
 type C = Prepend<[], string>;
 //  ^? [string]

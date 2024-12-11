@@ -1,7 +1,23 @@
 import type { Cast, Placeholder } from "../Any/_api"
-import type { AnyArray, Pop } from "../Array/_api"
+import type { AnyArray, Length, Append, Prepend, Tail } from "../Array/_api"
 import type { NonNullableFlat } from "../Object/_api"
+import type { AnyFunction } from "./Function"
 
+
+type Pos<I extends AnyArray> = Length<I>
+
+type Next<I extends AnyArray> = Prepend<I, unknown>
+
+type Prev<I extends AnyArray> = Tail<I>
+
+type GapOf<
+    T1 extends AnyArray,
+    T2 extends AnyArray,
+    TN extends AnyArray,
+    L extends AnyArray
+> = T1[Pos<L>] extends Placeholder
+    ? Append<T2[Pos<L>], TN>
+    : TN
 
 /**
 @name Gaps
@@ -25,21 +41,18 @@ type A = Gaps<[1, 2, 3]>;
 
 type B = Gaps<readonly [string, number]>;
 //  ^? [string | Placeholder, number | Placeholder]
-
-type C = Gaps<[string | null, number | undefined]>;
-//  ^? [string, number]
 ```
 **/
 type Gaps<T extends AnyArray> = Cast<NonNullableFlat<{
     [K in keyof T]?: T[K] | Placeholder
 }>, AnyArray>
 
-type UnionFactorial<T extends AnyArray> = T extends readonly [] ? never
-    : T | UnionFactorial<Pop<T>>;
-
-type Union2Intersection<U> = (
-    U extends unknown ? (arg: U) => void : never
-) extends (arg: infer I) => void ? I
-    : never;
-
-type A = UnionFactorial<[1, 2, 3]>
+export type Curry<T extends AnyFunction> =
+    <
+        P extends Gaps<Parameters<T>>,
+        G extends AnyArray = any[],
+        R extends any = ReturnType<T>
+    >(...args: Gaps<Parameters<T>> | P) =>
+        any extends never
+        ? R
+        : Curry<(...args: G) => R>
