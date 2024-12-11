@@ -1,6 +1,5 @@
 import type { AnyArray } from "./Array"
-import type { Length } from "./Length"
-import type { Tail } from "./Tail"
+import type { LastKey } from "./LastKey"
 
 /**
 @name Last
@@ -30,4 +29,4 @@ type D = Last<[]>;
 ```
 **/
 export type Last<T extends AnyArray> =
-    T[Length<Tail<T>>]
+    T[LastKey<T>]

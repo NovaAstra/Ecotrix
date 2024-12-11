@@ -15,6 +15,15 @@ import type {Reverse} from '@ecotrix/typox';
 
 type A = Reverse<[1, 2, 3]>;
 //  ^? [3, 2, 1]
+
+type B = Reverse<readonly [1, 2, 3]>;
+//  ^? []
+
+type C = Reverse<[]>;
+//  ^? []
+
+type D = Reverse<number[]>;
+//  ^? []
 ```
 **/
 export type Reverse<T extends AnyArray> =
