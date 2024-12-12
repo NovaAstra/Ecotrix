@@ -1,62 +1,36 @@
-import type { Cast, Placeholder } from "../Any/_api"
-import type { AnyArray, Length, Append, Prepend, Tail, RequiredKeys } from "../Array/_api"
-import type { NonNullableFlat } from "../Object/_api"
+import type { AnyArray, Length } from "../Array/_api"
 import type { AnyFunction } from "./Function"
 
+type Gradual<T extends AnyArray> =
+    T extends [...infer R, any]
+    ? Length<T> extends 0
+    ? T
+    : T | Gradual<R>
+    : T;
 
-type Pos<I extends AnyArray> = Length<I>
+type StringEqual<T extends String, R extends String> = T extends R ? R extends T ? true : false : false
 
-type Next<I extends AnyArray> = Prepend<I, unknown>
+type CovertIndex<T extends any[], R extends String, S extends any[] = []> = StringEqual<`${S['length']}`, R> extends true ? T['length'] : T extends [...infer O, infer L] ? CovertIndex<O, R, [...S, L]> : 0
+type GetStartSlice<T extends any[], S extends number, O extends any[]> = `${S}` extends `-${infer PS}` ? StartLeftBegin<T, CovertIndex<O, `${PS}`>> : StartLeftBegin<T, S>
+type StartLeftBegin<T extends any[], R extends number, S extends any[] = []> = StringEqual<`${S['length']}`, `${R}`> extends true ? T : T extends [infer O, ...infer L] ? StartLeftBegin<L, R, [...S, O]> : []
 
-type Prev<I extends AnyArray> = Tail<I>
 
-type GapOf<
-    T1 extends AnyArray,
-    T2 extends AnyArray,
-    TN extends AnyArray,
-    L extends AnyArray
-> = T1[Pos<L>] extends Placeholder
-    ? Append<T2[Pos<L>], TN>
-    : TN
+type GetEndSlice<T extends any[], S extends number> = `${S}` extends `-${infer PS}` ? EndRightBegin<T, `${PS}`> : EndLeftBegin<T, `${S}`>
+type EndRightBegin<T extends any[], R extends string, S extends any[] = []> = StringEqual<`${S['length']}`, R> extends true ? T : T extends [...infer O, infer L] ? EndRightBegin<O, R, [...S, L]> : []
+type EndLeftBegin<T extends any[], R extends string, S extends any[] = []> = StringEqual<`${S['length']}`, R> extends true ? S : T extends [infer O, ...infer L] ? EndLeftBegin<L, R, [...S, O]> : []
 
-/**
-@name Gaps
-@internal 
-@category Function
-@description
-`Gaps` 类型用于将数组类型 `T` 转换为一个新的类型，其中数组的每个元素都可以是原类型 `T[K]` 或者
-是占位符 `Placeholder`，并且返回一个非空的数组类型。
+type Slice<Arr extends any[], Start extends number = 0, End extends number = Arr['length']> = GetStartSlice<GetEndSlice<Arr, End>, Start, Arr>
 
-- 对于每个数组元素，类型可能是原来的类型 `T[K]` 或者 `Placeholder`。
-- 通过 `Cast` 和 `NonNullableFlat`，确保最终结果类型没有 `null` 或 `undefined`，并符合数组的类型。
 
-@template T
-
-@example
-```ts
-import type {Gaps} from '@ecotrix/typox';
-
-type A = Gaps<[1, 2, 3]>;
-//  ^? [1 | Placeholder, 2 | Placeholder, 3 | Placeholder]
-
-type B = Gaps<readonly [string, number]>;
-//  ^? [string | Placeholder, number | Placeholder]
-```
-**/
-type Gaps<T extends AnyArray> = Cast<NonNullableFlat<{
-    [K in keyof T]?: T[K] | Placeholder
-}>, AnyArray>
-
-export type Curry<T extends AnyFunction> =
-    <
-        P extends Gaps<Parameters<T>>,
-        G extends AnyArray = any[],
-        R extends any = ReturnType<T>
-    >(...args: Gaps<Parameters<T>> | P) =>
-        RequiredKeys<G> extends never
-        ? R
-        : Curry<(...args: G) => R>
-
-type A = (a: string, b: number, c: string | number) => number;
-type B = Parameters<A>
-type C = Gaps<B>
+export type Currying<
+    Function extends AnyFunction,
+    Length extends number = Parameters<Function>['length']
+> =
+    <Args extends Gradual<Parameters<Function>>>(...args: Args) =>
+        Args['length'] extends Length
+        ? ReturnType<Function>
+        : Currying<
+            (
+                ...args: Slice<Parameters<Function>, Args['length']>
+            ) => ReturnType<Function>
+        >
